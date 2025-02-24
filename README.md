@@ -1,4 +1,4 @@
-![Padlock security image](https://github.com/Rashodc36/your-repo/raw/main/images/padlock.jpg)
+<img width="400" src="https://github.com/user-attachments/assets/44bac428-01bb-4fe9-9d85-96cba7698bee" alt="Tor Logo with the onion and a crosshair on it"/>
 
 # fail2ban-auto-ban
 - [Scenario Creation](https://github.com/joshmadakor0/threat-hunting-scenario-tor/blob/main/threat-hunting-scenario-tor-event-creation.md)
