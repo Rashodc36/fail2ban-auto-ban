@@ -68,7 +68,6 @@ Format = detailed
 - Test Logwatch - sudo logwatch --mailto admin@yourdomain.com --detail high
 
 
-```
 <img width="1212" alt="image" src="https://github.com/user-attachments/assets/b13707ae-8c2d-4081-a381-2b521d3a0d8f">
 
 ---
