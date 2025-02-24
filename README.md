@@ -42,7 +42,7 @@ findtime = 600
 
 ---
 
-### 2. Configure Firewalld on Main Server` Table
+### 2. Configure Firewalld on Main Server Table
 - Enable Firewalld - sudo systemctl enable --now firewalld
 - Add SSH Protection to Rule -sudo firewall-cmd --permanent --add-service=ssh
 - Reload all rules - sudo firewall-cmd --reload
