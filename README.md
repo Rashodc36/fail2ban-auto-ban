@@ -1,4 +1,4 @@
-<img width="400" src="https://github.com/user-attachments/assets/44bac428-01bb-4fe9-9d85-96cba7698bee" alt="Tor Logo with the onion and a crosshair on it"/>
+<img width="400" src="https://github.com/your-username/your-repo/raw/main/images/padlock.jpg" alt="Padlock security image"/>
 
 # fail2ban-auto-ban
 - [Scenario Creation](https://github.com/joshmadakor0/threat-hunting-scenario-tor/blob/main/threat-hunting-scenario-tor-event-creation.md)
@@ -21,6 +21,7 @@ As a Linux System Administrator, you are responsible for securing SSH access to 
 - Install fail2ban - sudo dnf install fail2ban -y
 - Enable fail2ban service - sudo systemctl enable --now fail2ban
 - Configure SSH Protection in fail2ban - sudo vim /etc/fail2ban/jail.local
+-     enter the following inside of the file:
 ```kql
 [sshd]
 enabled = true
