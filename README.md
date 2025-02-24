@@ -18,7 +18,6 @@ As a Linux System Administrator, you are responsible for securing SSH access to 
 ## Steps Taken
 
 ### 1. Configure Fail2Ban to detect SSH login failures and enforce bans
-
 - Install fail2ban - sudo dnf install fail2ban -y
 - Enable fail2ban service - sudo systemctl enable --now fail2ban
 - Configure SSH Protection in fail2ban - sudo vim /etc/fail2ban/jail.local
@@ -41,7 +40,7 @@ findtime = 600
 <img width="1212" alt="image" src="https://github.com/user-attachments/assets/71402e84-8767-44f8-908c-1805be31122d">
 
 ---
-
+```
 ### 2. Configure Firewalld on Main Server Table
 - Enable Firewalld - sudo systemctl enable --now firewalld
 - Add SSH Protection to Rule -sudo firewall-cmd --permanent --add-service=ssh
