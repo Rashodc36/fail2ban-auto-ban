@@ -1,4 +1,4 @@
-<img width="400" src="https://github.com/your-username/your-repo/raw/main/images/padlock.jpg" alt="Padlock security image"/>
+![Padlock security image](https://github.com/Rashodc36/your-repo/raw/main/images/padlock.jpg)
 
 # fail2ban-auto-ban
 - [Scenario Creation](https://github.com/joshmadakor0/threat-hunting-scenario-tor/blob/main/threat-hunting-scenario-tor-event-creation.md)
