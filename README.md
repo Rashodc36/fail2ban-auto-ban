@@ -17,9 +17,20 @@ As a Linux System Administrator, you are responsible for securing SSH access to 
 
 ## Steps Taken
 
-### 1. Searched the `DeviceFileEvents` Table
+### 1. Configure Fail2Ban to detect SSH login failures and enforce bans
 
-Searched for any file that had the string "tor" in it and discovered what looks like the user "employee" downloaded a TOR installer, did something that resulted in many TOR-related files being copied to the desktop, and the creation of a file called `tor-shopping-list.txt` on the desktop at `2024-11-08T22:27:19.7259964Z`. These events began at `2024-11-08T22:14:48.6065231Z`.
+install fail2ban - sudo dnf install fail2ban -y  # For RHEL-based systems
+Enable fail2ban service - sudo systemctl enable --now fail2ban
+Configure SSH Protection in fail2ban - sudo vim /etc/fail2ban/jail.local
+  [sshd]
+  enabled = true
+  port = ssh
+  filter = sshd
+  logpath = /var/log/secure
+  maxretry = 3
+  bantime = 600
+  findtime = 600
+
 
 **Query used to locate events:**
 
