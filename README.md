@@ -84,7 +84,7 @@ Searched for any indication the TOR browser was used to establish a connection u
 
 <img width="1212" alt="image" src="https://github.com/user-attachments/assets/87a02b5b-7d12-4f53-9255-f5e750d0e3cb">
 
-### 4. Implement Automatic Blocking for Repeated Attacks
+### 5. Implement Automatic Blocking for Repeated Attacks
 -  Create the Script - ```sudo nano /usr/local/bin/block_attackers.sh```
 ```
 #!/bin/bash
@@ -103,6 +103,13 @@ done
 - Make It Executable - sudo chmod +x /usr/local/bin/block_attackers.sh
 - Add to Crontab (Runs Every 10 Minutes) - ```sudo crontab -e```
   - Enter the following: ```*/10 * * * * /usr/local/bin/block_attackers.sh```
+  -     save and close file
+
+### 6. Test and Monitor the Setup
+- Test Fail2Ban ```sudo fail2ban-client status sshd```
+- Verify Firewall Blocks - ```sudo firewall-cmd --list-all```
+- Check Logwatch Reports - ```sudo logwatch --mailto admin@yourdomain.com --detail high```
+
 
 
 
