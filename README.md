@@ -19,7 +19,7 @@ As a Linux System Administrator, you are responsible for securing SSH access to 
 
 ### 1. Configure Fail2Ban to detect SSH login failures and enforce bans
 
-install fail2ban - sudo dnf install fail2ban -y  # For RHEL-based systems
+A. Install fail2ban - sudo dnf install fail2ban -y  # For RHEL-based systems
 Enable fail2ban service - sudo systemctl enable --now fail2ban
 Configure SSH Protection in fail2ban - sudo vim /etc/fail2ban/jail.local
 ```kql
@@ -35,20 +35,6 @@ findtime = 600
 
 **Query used to locate events:**
 
-
-
-
-
-
-```kql
-[sshd]
-enabled = true
-port = ssh
-filter = sshd
-logpath = /var/log/secure
-maxretry = 3
-bantime = 600
-findtime = 600
 ```
 <img width="1212" alt="image" src="https://github.com/user-attachments/assets/71402e84-8767-44f8-908c-1805be31122d">
 
