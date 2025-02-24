@@ -40,7 +40,7 @@ Configure SSH Protection in fail2ban - sudo vim /etc/fail2ban/jail.local
 
 
 ```kql
-DeviceFileEvents  
+DeviceFileEvent  
 | where DeviceName == "threat-hunt-lab"  
 | where InitiatingProcessAccountName == "employee"  
 | where FileName contains "tor"  
