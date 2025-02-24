@@ -21,8 +21,8 @@ As a Linux System Administrator, you are responsible for securing SSH access to 
 - Install fail2ban - ```sudo dnf install fail2ban -y```
 - Enable fail2ban service - ```sudo systemctl enable --now fail2ban```
 - Configure SSH Protection in fail2ban - ```sudo vim /etc/fail2ban/jail.local```
--     enter the following inside of the file:
-```kql
+-     enter the following text inside of the file:
+```
 [sshd]
 enabled = true
 port = ssh
@@ -32,8 +32,8 @@ maxretry = 3
 bantime = 600
 findtime = 600
 ```
-- Restart fail2ban service - sudo systemctl restart fail2ban
-- Check status of fail2ban - sudo fail2ban-client status sshd
+- Restart fail2ban service - ```sudo systemctl restart fail2ban```
+- Check status of fail2ban - ```sudo fail2ban-client status sshd```
 
 ### 2. Configure Firewalld on Main Server Table
 - Enable Firewalld - ```sudo systemctl enable --now firewalld```
