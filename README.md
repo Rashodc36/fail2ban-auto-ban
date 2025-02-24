@@ -35,28 +35,17 @@ findtime = 600
 - Restart fail2ban service - sudo systemctl restart fail2ban
 - Check status of fail2ban - sudo fail2ban-client status sshd
 
-**Query used to locate events:**
-
-```
-<img width="1212" alt="image" src="https://github.com/user-attachments/assets/71402e84-8767-44f8-908c-1805be31122d">
-
----
-```
 ### 2. Configure Firewalld on Main Server Table
 - Enable Firewalld - ```sudo systemctl enable --now firewalld```
 - Add SSH Protection to Rule -sudo firewall-cmd --permanent --add-service=ssh
 - Reload all rules - sudo firewall-cmd --reload
 - Block an IP Manually to ensure it's working - sudo firewall-cmd --permanent --add-rich-rule='rule family="ipv4" source address="10.109.18.13" reject'
 - Reload all rules, which should add 10.109.18.13 - sudo firewall-cmd --reload
-- List All Blocked IPs - sudo firewall-cmd --list-all (If you see 10.109.18.13, great job! you are on the right trach. If you don't see it, repeat your steps...You got this!)
+- List All Blocked IPs - sudo firewall-cmd --list-all
+-     (If you see 10.109.18.13, great job! you are on the right trach. If you don't see it, repeat your steps...You got this!)
 
-Searched for any `ProcessCommandLine` that contained the string "tor-browser-windows-x86_64-portable-14.0.1.exe". Based on the logs returned, at `2024-11-08T22:16:47.4484567Z`, an employee on the "threat-hunt-lab" device ran the file `tor-browser-windows-x86_64-portable-14.0.1.exe` from their Downloads folder, using a command that triggered a silent installation.
 
-**Query used to locate event:**
 
-<img width="1212" alt="image" src="https://github.com/user-attachments/assets/b07ac4b4-9cb3-4834-8fac-9f5f29709d78">
-
----
 
 ### 3. Set Up Log Monitoring for All Servers
 -  Install Logwatch on Each Server - sudo dnf install logwatch -y
