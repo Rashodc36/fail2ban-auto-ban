@@ -4,20 +4,14 @@
 - [Scenario Creation](https://github.com/joshmadakor0/threat-hunting-scenario-tor/blob/main/threat-hunting-scenario-tor-event-creation.md)
 
 ## Platforms and Languages Leveraged
-- Windows 10 Virtual Machines (Microsoft Azure)
-- EDR Platform: Microsoft Defender for Endpoint
-- Kusto Query Language (KQL)
-- Tor Browser
+- Red Hat 9/Ubuntu Virtual Machines
+- Fail2ban: Red Hat 9 CLI
+- Bash Scripting Language
+- Gmail
 
 ##  Scenario
 
-Management suspects that some employees may be using TOR browsers to bypass network security controls because recent network logs show unusual encrypted traffic patterns and connections to known TOR entry nodes. Additionally, there have been anonymous reports of employees discussing ways to access restricted sites during work hours. The goal is to detect any TOR usage and analyze related security incidents to mitigate potential risks. If any use of TOR is found, notify management.
-
-### High-Level TOR-Related IoC Discovery Plan
-
-- **Check `DeviceFileEvents`** for any `tor(.exe)` or `firefox(.exe)` file events.
-- **Check `DeviceProcessEvents`** for any signs of installation or usage.
-- **Check `DeviceNetworkEvents`** for any signs of outgoing connections over known TOR ports.
+As a Linux System Administrator, you are responsible for securing SSH access to critical infrastructure. To mitigate unauthorized login attempts and potential brute-force attacks, you have implemented Fail2Ban across multiple servers. Your goal is to configure Fail2Ban to monitor authentication logs, automatically ban suspicious IP addresses, and send email alerts upon repeated failed login attempt
 
 ---
 
