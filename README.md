@@ -47,30 +47,24 @@ findtime = 600
 - Reload all rules - sudo firewall-cmd --reload
 - Block an IP Manually to ensure it's working - sudo firewall-cmd --permanent --add-rich-rule='rule family="ipv4" source address="10.109.18.13" reject'
 - Reload all rules, which should add 10.109.18.13 - sudo firewall-cmd --reload
-- List All Blocked IPs - sudo firewall-cmd --list-all (If you see 10.109.18.13)
-
-
-
-
-
-
+- List All Blocked IPs - sudo firewall-cmd --list-all (If you see 10.109.18.13, great job! you are on the right trach. If you don't see it, repeat your steps...You got this!)
 
 Searched for any `ProcessCommandLine` that contained the string "tor-browser-windows-x86_64-portable-14.0.1.exe". Based on the logs returned, at `2024-11-08T22:16:47.4484567Z`, an employee on the "threat-hunt-lab" device ran the file `tor-browser-windows-x86_64-portable-14.0.1.exe` from their Downloads folder, using a command that triggered a silent installation.
 
 **Query used to locate event:**
 
-```kql
-
-DeviceProcessEvents  
-| where DeviceName == "threat-hunt-lab"  
-| where ProcessCommandLine contains "tor-browser-windows-x86_64-portable-14.0.1.exe"  
-| project Timestamp, DeviceName, AccountName, ActionType, FileName, FolderPath, SHA256, ProcessCommandLine
-```
 <img width="1212" alt="image" src="https://github.com/user-attachments/assets/b07ac4b4-9cb3-4834-8fac-9f5f29709d78">
 
 ---
 
-### 3. Searched the `DeviceProcessEvents` Table for TOR Browser Execution
+### 3. Set Up Log Monitoring for All Servers
+-  Install Logwatch on Each Server - sudo dnf install logwatch -y
+-  Configure Logwatch to Send Alerts to the Main Server - sudo vim /etc/logwatch/conf/logwatch.conf
+```
+Output = mail
+MailTo = admin@yourdomain.com
+Format = detailed
+```
 
 Searched for any indication that user "employee" actually opened the TOR browser. There was evidence that they did open it at `2024-11-08T22:17:21.6357935Z`. There were several other instances of `firefox.exe` (TOR) as well as `tor.exe` spawned afterwards.
 
