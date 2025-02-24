@@ -22,14 +22,15 @@ As a Linux System Administrator, you are responsible for securing SSH access to 
 install fail2ban - sudo dnf install fail2ban -y  # For RHEL-based systems
 Enable fail2ban service - sudo systemctl enable --now fail2ban
 Configure SSH Protection in fail2ban - sudo vim /etc/fail2ban/jail.local
-  [sshd]
-  enabled = true
-  port = ssh
-  filter = sshd
-  logpath = /var/log/secure
-  maxretry = 3
-  bantime = 600
-  findtime = 600
+```kql
+[sshd]
+enabled = true
+port = ssh
+filter = sshd
+logpath = /var/log/secure
+maxretry = 3
+bantime = 600
+findtime = 600
 
 
 **Query used to locate events:**
