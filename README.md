@@ -1,7 +1,7 @@
 <img width="200" src="https://github.com/Rashodc36/fail2ban-auto-ban/blob/main/s-laiba-ali-C0_7D50wZQ0-unsplash.jpg?raw=true" alt="Padlock security image"/>
 
 # fail2ban-auto-ban
-- [Response Taken:](https://github.com/Rashodc36/fail2ban-auto-ban)
+[Response Taken:](https://github.com/Rashodc36/fail2ban-auto-ban)
 https://github.com/Rashodc36/fail2ban-auto-ban
 ## Platforms and Languages Leveraged
 - Red Hat 9/Ubuntu Virtual Machines
