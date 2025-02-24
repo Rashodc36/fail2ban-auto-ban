@@ -102,7 +102,7 @@ done
 ```
 - Make It Executable - sudo chmod +x /usr/local/bin/block_attackers.sh
 - Add to Crontab (Runs Every 10 Minutes) - ```sudo crontab -e```
-  - ```sudo crontab -e```
+  - Enter the following: ```*/10 * * * * /usr/local/bin/block_attackers.sh```
 
 
 
