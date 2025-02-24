@@ -32,8 +32,8 @@ maxretry = 3
 bantime = 600
 findtime = 600
 ```
-- sudo systemctl restart fail2ban
-- sudo fail2ban-client status sshd
+- Restart fail2ban service - sudo systemctl restart fail2ban
+- Check status of fail2ban - sudo fail2ban-client status sshd
 
 **Query used to locate events:**
 
