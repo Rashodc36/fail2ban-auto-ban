@@ -37,10 +37,10 @@ findtime = 600
 
 ### 2. Configure Firewalld on Main Server Table
 - Enable Firewalld - ```sudo systemctl enable --now firewalld```
-- Add SSH Protection to Rule -sudo firewall-cmd --permanent --add-service=ssh
-- Reload all rules - sudo firewall-cmd --reload
-- Block an IP Manually to ensure it's working - sudo firewall-cmd --permanent --add-rich-rule='rule family="ipv4" source address="10.109.18.13" reject'
-- Reload all rules, which should add 10.109.18.13 - sudo firewall-cmd --reload
+- Add SSH Protection to Rule - ```sudo firewall-cmd --permanent --add-service=ssh```
+- Reload all rules - ```sudo firewall-cmd --reload```
+- Block an IP Manually to ensure it's working - ```sudo firewall-cmd --permanent --add-rich-rule='rule family="ipv4" source address="10.109.18.13" reject'```
+- Reload all rules, which should add 10.109.18.13 - ```sudo firewall-cmd --reload```
 - List All Blocked IPs - ````sudo firewall-cmd --list-all````
   &nbsp;&nbsp;&nbsp;If you see 10.109.18.13, great job! you are on the right trach. If you don't see it, repeat your steps...You got this!)
 
