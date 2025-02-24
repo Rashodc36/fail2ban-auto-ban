@@ -34,6 +34,11 @@ Configure SSH Protection in fail2ban - sudo vim /etc/fail2ban/jail.local
 
 **Query used to locate events:**
 
+
+
+
+
+
 ```kql
 DeviceFileEvents  
 | where DeviceName == "threat-hunt-lab"  
