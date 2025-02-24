@@ -65,38 +65,47 @@ Output = mail
 MailTo = admin@yourdomain.com
 Format = detailed
 ```
+- Test Logwatch - sudo logwatch --mailto admin@yourdomain.com --detail high
 
-Searched for any indication that user "employee" actually opened the TOR browser. There was evidence that they did open it at `2024-11-08T22:17:21.6357935Z`. There were several other instances of `firefox.exe` (TOR) as well as `tor.exe` spawned afterwards.
 
-**Query used to locate events:**
-
-```kql
-DeviceProcessEvents  
-| where DeviceName == "threat-hunt-lab"  
-| where FileName has_any ("tor.exe", "firefox.exe", "tor-browser.exe")  
-| project Timestamp, DeviceName, AccountName, ActionType, FileName, FolderPath, SHA256, ProcessCommandLine  
-| order by Timestamp desc
 ```
 <img width="1212" alt="image" src="https://github.com/user-attachments/assets/b13707ae-8c2d-4081-a381-2b521d3a0d8f">
 
 ---
 
-### 4. Searched the `DeviceNetworkEvents` Table for TOR Network Connections
+### 4. Automate Email Alerts for Security Events
+- Set Up a .forward File on Main Server - ```echo "your-email@example.com" > ~/.forward```
+- Change Permissions for .forward file (critical) - ```chmod 600 ~/.forward```
+- Configure Email Sending - sudo dnf install postfix -y
+- Enable and start the service - sudo systemctl enable --now postfix
+- Send a test email - echo "Test alert from IDS system" | mail -s "Security Alert" your-email@example.com
+- MAke sure that you have changed the your-email@example.com to your actual email where you want the email to be sent to. After complete, wait a couple second to see if you have receieved an email
 
 Searched for any indication the TOR browser was used to establish a connection using any of the known TOR ports. At `2024-11-08T22:18:01.1246358Z`, an employee on the "threat-hunt-lab" device successfully established a connection to the remote IP address `176.198.159.33` on port `9001`. The connection was initiated by the process `tor.exe`, located in the folder `c:\users\employee\desktop\tor browser\browser\torbrowser\tor\tor.exe`. There were a couple of other connections to sites over port `443`.
 
-**Query used to locate events:**
-
-```kql
-DeviceNetworkEvents  
-| where DeviceName == "threat-hunt-lab"  
-| where InitiatingProcessAccountName != "system"  
-| where InitiatingProcessFileName in ("tor.exe", "firefox.exe")  
-| where RemotePort in ("9001", "9030", "9040", "9050", "9051", "9150", "80", "443")  
-| project Timestamp, DeviceName, InitiatingProcessAccountName, ActionType, RemoteIP, RemotePort, RemoteUrl, InitiatingProcessFileName, InitiatingProcessFolderPath  
-| order by Timestamp desc
-```
 <img width="1212" alt="image" src="https://github.com/user-attachments/assets/87a02b5b-7d12-4f53-9255-f5e750d0e3cb">
+
+### 4. Implement Automatic Blocking for Repeated Attacks
+-  Create the Script - ```sudo nano /usr/local/bin/block_attackers.sh```
+```
+#!/bin/bash
+LOG=/var/log/secure
+ATTEMPTS=5
+BAN_TIME=3600  # 1 hour
+
+grep "Failed password" $LOG | awk '{print $(NF-3)}' | sort | uniq -c | sort -nr | while read count ip; do
+    if [ $count -gt $ATTEMPTS ]; then
+        echo "Blocking $ip due to $count failed login attempts"
+        sudo firewall-cmd --permanent --add-rich-rule="rule family='ipv4' source address='$ip' reject"
+        sudo firewall-cmd --reload
+    fi
+done
+```
+- Make It Executable - sudo chmod +x /usr/local/bin/block_attackers.sh
+- Add to Crontab (Runs Every 10 Minutes) - ```sudo crontab -e```
+  - ```sudo crontab -e```
+
+
 
 ---
 
