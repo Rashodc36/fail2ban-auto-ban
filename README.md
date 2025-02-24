@@ -21,7 +21,7 @@ As a Linux System Administrator, you are responsible for securing SSH access to 
 - Install fail2ban - ```sudo dnf install fail2ban -y```
 - Enable fail2ban service - ```sudo systemctl enable --now fail2ban```
 - Configure SSH Protection in fail2ban - ```sudo vim /etc/fail2ban/jail.local```
--     enter the following text inside of the file:
+-     Enter the following text, save, and exit:
 ```
 [sshd]
 enabled = true
@@ -49,16 +49,14 @@ findtime = 600
 
 ### 3. Set Up Log Monitoring for All Servers
 -  Install Logwatch on Each Server - sudo dnf install logwatch -y
--  Configure Logwatch to Send Alerts to the Main Server - sudo vim /etc/logwatch/conf/logwatch.conf
+-  Configure Logwatch to Send Alerts to the Main Server - ```sudo vim /etc/logwatch/conf/logwatch.conf```
+-  Enter the following text, save, and exit
 ```
 Output = mail
 MailTo = admin@yourdomain.com
 Format = detailed
 ```
 - Test Logwatch - sudo logwatch --mailto admin@yourdomain.com --detail high
-
-
-<img width="1212" alt="image" src="https://github.com/user-attachments/assets/b13707ae-8c2d-4081-a381-2b521d3a0d8f">
 
 ---
 
@@ -68,15 +66,13 @@ Format = detailed
 - Configure Email Sending - sudo dnf install postfix -y
 - Enable and start the service - sudo systemctl enable --now postfix
 - Send a test email - echo "Test alert from IDS system" | mail -s "Security Alert" your-email@example.com
-- MAke sure that you have changed the your-email@example.com to your actual email where you want the email to be sent to. After complete, wait a couple second to see if you have receieved an email
-
-Searched for any indication the TOR browser was used to establish a connection using any of the known TOR ports. At `2024-11-08T22:18:01.1246358Z`, an employee on the "threat-hunt-lab" device successfully established a connection to the remote IP address `176.198.159.33` on port `9001`. The connection was initiated by the process `tor.exe`, located in the folder `c:\users\employee\desktop\tor browser\browser\torbrowser\tor\tor.exe`. There were a couple of other connections to sites over port `443`.
-
-<img width="1212" alt="image" src="https://github.com/user-attachments/assets/87a02b5b-7d12-4f53-9255-f5e750d0e3cb">
+- Ensure that you have replaced your-email@example.com with your actual email address where you want to receive the message. Once done, wait a few seconds to check if you receive an email
+---
 
 ### 5. Implement Automatic Blocking for Repeated Attacks
 -  Create the Script - ```sudo nano /usr/local/bin/block_attackers.sh```
 ```
+- Enter the following text, save, and exit:
 #!/bin/bash
 LOG=/var/log/secure
 ATTEMPTS=5
@@ -93,7 +89,6 @@ done
 - Make It Executable - sudo chmod +x /usr/local/bin/block_attackers.sh
 - Add to Crontab (Runs Every 10 Minutes) - ```sudo crontab -e```
   - Enter the following: ```*/10 * * * * /usr/local/bin/block_attackers.sh```
-  -     save and close file
 
 ### 6. Test and Monitor the Setup
 - Test Fail2Ban ```sudo fail2ban-client status sshd```
@@ -101,67 +96,19 @@ done
 - Check Logwatch Reports - ```sudo logwatch --mailto admin@yourdomain.com --detail high```
 
 
-
-
 ---
 
-## Chronological Event Timeline 
-
-### 1. File Download - TOR Installer
-
-- **Timestamp:** `2024-11-08T22:14:48.6065231Z`
-- **Event:** The user "employee" downloaded a file named `tor-browser-windows-x86_64-portable-14.0.1.exe` to the Downloads folder.
-- **Action:** File download detected.
-- **File Path:** `C:\Users\employee\Downloads\tor-browser-windows-x86_64-portable-14.0.1.exe`
-
-### 2. Process Execution - TOR Browser Installation
-
-- **Timestamp:** `2024-11-08T22:16:47.4484567Z`
-- **Event:** The user "employee" executed the file `tor-browser-windows-x86_64-portable-14.0.1.exe` in silent mode, initiating a background installation of the TOR Browser.
-- **Action:** Process creation detected.
-- **Command:** `tor-browser-windows-x86_64-portable-14.0.1.exe /S`
-- **File Path:** `C:\Users\employee\Downloads\tor-browser-windows-x86_64-portable-14.0.1.exe`
-
-### 3. Process Execution - TOR Browser Launch
-
-- **Timestamp:** `2024-11-08T22:17:21.6357935Z`
-- **Event:** User "employee" opened the TOR browser. Subsequent processes associated with TOR browser, such as `firefox.exe` and `tor.exe`, were also created, indicating that the browser launched successfully.
-- **Action:** Process creation of TOR browser-related executables detected.
-- **File Path:** `C:\Users\employee\Desktop\Tor Browser\Browser\TorBrowser\Tor\tor.exe`
-
-### 4. Network Connection - TOR Network
-
-- **Timestamp:** `2024-11-08T22:18:01.1246358Z`
-- **Event:** A network connection to IP `176.198.159.33` on port `9001` by user "employee" was established using `tor.exe`, confirming TOR browser network activity.
-- **Action:** Connection success.
-- **Process:** `tor.exe`
-- **File Path:** `c:\users\employee\desktop\tor browser\browser\torbrowser\tor\tor.exe`
-
-### 5. Additional Network Connections - TOR Browser Activity
-
-- **Timestamps:**
-  - `2024-11-08T22:18:08Z` - Connected to `194.164.169.85` on port `443`.
-  - `2024-11-08T22:18:16Z` - Local connection to `127.0.0.1` on port `9150`.
-- **Event:** Additional TOR network connections were established, indicating ongoing activity by user "employee" through the TOR browser.
-- **Action:** Multiple successful connections detected.
-
-### 6. File Creation - TOR Shopping List
-
-- **Timestamp:** `2024-11-08T22:27:19.7259964Z`
-- **Event:** The user "employee" created a file named `tor-shopping-list.txt` on the desktop, potentially indicating a list or notes related to their TOR browser activities.
-- **Action:** File creation detected.
-- **File Path:** `C:\Users\employee\Desktop\tor-shopping-list.txt`
-
----
 
 ## Summary
 
-The user "employee" on the "threat-hunt-lab" device initiated and completed the installation of the TOR browser. They proceeded to launch the browser, establish connections within the TOR network, and created various files related to TOR on their desktop, including a file named `tor-shopping-list.txt`. This sequence of activities indicates that the user actively installed, configured, and used the TOR browser, likely for anonymous browsing purposes, with possible documentation in the form of the "shopping list" file.
+In this lab, you have configured Fail2Ban to enhance security on a Linux server by automatically detecting and banning suspicious SSH login attempts. You have also integrate Firewalld for additional protection, set up Logwatch for monitoring, and configured automated email alerts for security notifications. Finally, you have implement a script to dynamically block attackers based on repeated failed login attempts.
+
+By completing this lab, you've gained hands-on experience in intrusion detection, log monitoring, and automating security measures to protect Linux servers from brute-force attacks.
 
 ---
 
 ## Response Taken
 
-TOR usage was confirmed on the endpoint `threat-hunt-lab` by the user `employee`. The device was isolated, and the user's direct manager was notified.
+As part of the response, a thorough examination of the blocked IP addresses was conducted to identify any patterns or trends. This involved analyzing the geographical origin of the IP addresses to determine if they were consistently coming from specific regions, which may pose a higher risk. If a common theme was identified, such as multiple failed login attempts originating from a particular part of the world, the corresponding IP range or region could be proactively blocked to further mitigate potential threats
 
 ---
